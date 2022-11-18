@@ -1,27 +1,24 @@
 import Image from "next/image";
-import React from "react";
+import Link from "next/link";
+import { IconContext } from "react-icons";
 import Logo from "../../public/logo.svg";
-
+import { ROUTE_LIST } from "./routes";
 export const LeftNav = () => {
   return (
-    <div className="w-[244px] p-4">
-      <a href="/" className="w-full">
-        <Image
-          src={Logo}
-          alt="ig-logo"
-          width={103}
-          height={92}
-          className="m-4"
-        />
-      </a>
-      <div>Home</div>
-      <div>Search</div>
-      <div>Explore</div>
-      <div>Messages</div>
-      <div>Notifications</div>
-      <div>Create</div>
-      <div>Profile</div>
-      <div>More</div>
+    <div className="w-[244px] p-6">
+      <div className="py-5 mb-5">
+        <Link href="/" className="w-full">
+          <Image priority src={Logo} alt="ig-logo" width={103} height={92} />
+        </Link>
+      </div>
+      {ROUTE_LIST.map((item) => (
+        <div className="flex flex-row items-center gap-4 py-5">
+          <IconContext.Provider value={{ className: "text-2xl" }}>
+            {item.icon}
+          </IconContext.Provider>
+          <p className="text-md">{item.title}</p>
+        </div>
+      ))}
     </div>
   );
 };
